@@ -32,10 +32,11 @@ def JE_writer():
     code=code_gen()
     Account_Number=input("Enter an Account Number")
     Amount =input("Enter an Amount")
-    JE[code]=[Account_Number,Amount]
-    with open("C:\\Users\\davecrob2\\Documents\\GitHub\\AIS\\jeextract.csv",'w') as je_csv:
-        writer =csv.writer(je_csv)
-        for key, value in JE.items():
-            writer.writerow([key,value])
-    return JE
-
+    
+    with open('jeextract.json','r') as fp:
+        json_data=json.load(fp)
+        json_data[code]={}
+        json_data[code][Account_Number]=int(Amount)
+  
+    with open('jeextract.json','w') as fp:
+        fp.write(json.dumps(json_data))
