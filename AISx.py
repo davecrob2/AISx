@@ -64,4 +64,4 @@ def dictionary(code,acct,amt):
     dic={}
     dic[code]={}
     dic[code][acct]=int(amt)
-    #return dic
+    return dic
