@@ -29,17 +29,27 @@ def gl_add():
             fp.write(json.dumps(json_data))
 
 def JE_writer():
+    #Generates JE Number using code_gen
     code=code_gen()
-    journ[code]={}
-    while True:
     
+    #Creates nested dictionary
+    journ[code]={}
+    
+    #Loop for inputs of debits and credits
+    while True:
+        
+        #User input
         y=input('Account Name: ')
         z=input('Amount Debit/(Credit): ')
+        
+        #Updates the dictionary
         journ[code].update({y:int(z)})
+        
+        #Checks that the JE is balanced
         if sum(journ[code].values()) == 0:
             break
     
-
+    #Stores the JE in jeextract.json as a dictionary
     with open('jeextract.json','r') as fp:
         json_data=json.load(fp)
         json_data=journ
@@ -54,4 +64,4 @@ def dictionary(code,acct,amt):
     dic={}
     dic[code]={}
     dic[code][acct]=int(amt)
-    return dic
+    #return dic
