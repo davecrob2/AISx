@@ -30,13 +30,28 @@ def gl_add():
 
 def JE_writer():
     code=code_gen()
-    Account_Number=input("Enter an Account Number")
-    Amount =input("Enter an Amount")
+    journ[code]={}
+    while True:
     
+        y=input('Account Name: ')
+        z=input('Amount Debit/(Credit): ')
+        journ[code].update({y:int(z)})
+        if sum(journ[code].values()) == 0:
+            break
+    
+
     with open('jeextract.json','r') as fp:
         json_data=json.load(fp)
-        json_data[code]={}
-        json_data[code][Account_Number]=int(Amount)
+        json_data=journ
   
     with open('jeextract.json','w') as fp:
         fp.write(json.dumps(json_data))
+
+    #return(journ)
+
+
+def dictionary(code,acct,amt):
+    dic={}
+    dic[code]={}
+    dic[code][acct]=int(amt)
+    return dic
