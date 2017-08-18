@@ -33,7 +33,9 @@ def JE_writer():
     code=code_gen()
     
     #Creates nested dictionary
+    journ=dict()
     journ[code]={}
+    
     
     #Loop for inputs of debits and credits
     while True:
@@ -65,3 +67,15 @@ def dictionary(code,acct,amt):
     dic[code]={}
     dic[code][acct]=int(amt)
     return dic
+
+def extract_to_csv():
+    #Opens and reads json extracts
+    with open('jeextract.json','r') as fp:
+        json_data=json.load(fp)
+    
+    #Writes json extracts to csv
+    with open('jeextract.csv', 'w') as csv_file:
+        writer=csv.writer(csv_file)
+        for code in json_data:
+            for acct in json_data[code]:
+                writer.writerow([code, acct, json_data[code][acct]])
