@@ -34,6 +34,7 @@ def JE_writer():
     
     #Creates nested dictionary
     journ=dict()
+    
     journ[code]={}
     
     
@@ -54,7 +55,7 @@ def JE_writer():
     #Stores the JE in jeextract.json as a dictionary
     with open('jeextract.json','r') as fp:
         json_data=json.load(fp)
-        json_data=journ
+        json_data.update(journ)    
   
     with open('jeextract.json','w') as fp:
         fp.write(json.dumps(json_data))
@@ -74,7 +75,7 @@ def extract_to_csv():
         json_data=json.load(fp)
     
     #Writes json extracts to csv
-    with open('jeextract.csv', 'w') as csv_file:
+    with open('jeextract.csv', 'a') as csv_file:
         writer=csv.writer(csv_file)
         for code in json_data:
             for acct in json_data[code]:
